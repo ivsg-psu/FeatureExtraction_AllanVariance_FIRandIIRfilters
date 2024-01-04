@@ -188,7 +188,7 @@ axis_position = [(85+80+415.584)/width, 0.1567, 415.6/width, 0.7683];
 subplot(1,2,2)
 hold on
 grid on
-plot(-1,-1,'Color',[0.7 0.7 0.7],'Linewidth',4)
+plot(-1,-1,'Color',[0.7 0.7 0.7],'Linewidth',3)
 plot(-1,-1,'c.','Markersize',10)
 plot(-1,-1,'b','Linewidth',1.2)
 plot(-1,-1,'m','Linewidth',1.2)
