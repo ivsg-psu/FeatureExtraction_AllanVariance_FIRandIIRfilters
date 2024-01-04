@@ -93,12 +93,12 @@ jf = java.text.DecimalFormat;   % To add comma to numbers
 %%% To show MSE is independent of signal length
 figure(01)
 clf
-width = 1555.6-40; height = 400; right = 20; bottom = 100;
+width = 1469.3; height = 400; right = 20; bottom = 100;
 set(gcf, 'position', [right, bottom, width, height])
 custom_color_map = default_color_map(1:floor(256/number_of_normalized_cutoff_frequencies):256,:);
 for index_target = 1:number_of_target_points
     legend_cell   = cell(number_of_normalized_cutoff_frequencies+1,1);
-    axis_position = [(85+(index_target-1)*475)/width, 0.1567, 415.6/width, 0.7683];
+    axis_position = [(75+(index_target-1)*(55+415.584))/width, 0.1567, 415.6/width, 0.7683];
     subplot(1,3,index_target)
     hold on
     grid on
@@ -163,7 +163,7 @@ ylim([0 0.045])
 index_freq = 1;
 figure(03)
 clf
-width = 1056.2+25; height = 400; right = 100; bottom = 100;
+width = 1056.2+10; height = 400; right = 100; bottom = 100;
 set(gcf, 'position', [right, bottom, width, height])
 axis_position = [85/width, 0.1567, 415.6/width, 0.7683];
 subplot(1,2,1)
@@ -184,7 +184,7 @@ xlabel('FIR Filter Order','Interpreter','latex','FontSize',18)
 title('$(a)$','Interpreter','latex','FontSize',18)
 
 normalized_cutoff_frequency = list_of_normalized_cutoff_frequencies(index_freq);
-axis_position = [(85+80+415.584)/width, 0.1567, 415.6/width, 0.7683];
+axis_position = [(160+415.584)/width, 0.1567, 415.6/width, 0.7683];
 subplot(1,2,2)
 hold on
 grid on
