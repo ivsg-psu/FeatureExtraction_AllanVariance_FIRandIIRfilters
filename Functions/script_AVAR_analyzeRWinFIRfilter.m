@@ -159,7 +159,7 @@ xlabel('FIR Filter Order','Interpreter','latex','FontSize',18)
 title('$(b)$','Interpreter','latex','FontSize',18)
 ylim([0 0.045])
 
-%%% Area of AVAR + Time domain demo
+%% Area of AVAR + Time domain demo
 index_freq = 1;
 figure(03)
 clf
@@ -170,9 +170,9 @@ subplot(1,2,1)
 hold on
 grid on
 plot(list_of_fir_filter_orders,...
-     0.5*sum(calculated_AVAR(1:end-1,:,index_freq)+calculated_AVAR(2:end,:,1),index_freq),...
+     0.5*sum(calculated_AVAR(1:end-1,:,index_freq)+calculated_AVAR(2:end,:,1),1),...
      'k','Linewidth',1.2)
-xline(3,'c--','Linewidth',1.2)
+xline(3,'--','Color',[0.8500 0.3250 0.0980],'Linewidth',1.2)
 xline(80,'b','Linewidth',1.2)
 xline(550,'m-.','Linewidth',1.2)
 legend(['$\omega_{n} =$ ' num2str(list_of_normalized_cutoff_frequencies(index_freq))],...
@@ -189,7 +189,7 @@ subplot(1,2,2)
 hold on
 grid on
 plot(-1,-1,'Color',[0.7 0.7 0.7],'Linewidth',3)
-plot(-1,-1,'c.','Markersize',10)
+plot(-1,-1,'.','Color',[0.8500 0.3250 0.0980],'Markersize',10)
 plot(-1,-1,'b','Linewidth',1.2)
 plot(-1,-1,'m','Linewidth',1.2)
 
@@ -197,7 +197,7 @@ plot(-1,-1,'m','Linewidth',1.2)
 fir_filter_num  = fir1(3,normalized_cutoff_frequency);
 filtered_output = filter(fir_filter_num,1,input_signal);
 filtered_output = filtered_output(end-number_of_time_steps+1:end);
-plot(time_vector,filtered_output,'c.','Markersize',4)
+plot(time_vector,filtered_output,'.','Color',[0.8500 0.3250 0.0980],'Markersize',4)
 
 plot(time_vector,random_walk(end-number_of_time_steps+1:end),'Color',[0.7 0.7 0.7],'Linewidth',3)
 
@@ -214,6 +214,68 @@ filtered_output = filtered_output(end-number_of_time_steps+1:end);
 plot(time_vector,filtered_output,'m','Linewidth',1.2)
 
 legend('Reference Input','$p=3$','$p=80$','$p=550$','NumColumns',2,...
+       'Interpreter','latex','FontSize',13)
+set(gca,'Position',axis_position,'FontSize',13)
+ylabel('Amplitude $[Unit]$','Interpreter','latex','FontSize',18)
+xlabel('Time $[s]$','Interpreter','latex','FontSize',18)
+title('$(b)$','Interpreter','latex','FontSize',18)
+xlim([0 100])
+
+%% Area of AVAR + Time domain demo
+index_freq = 5;
+figure(04)
+clf
+width = 1056.2+10; height = 400; right = 100; bottom = 100;
+set(gcf, 'position', [right, bottom, width, height])
+axis_position = [85/width, 0.1567, 415.6/width, 0.7683];
+subplot(1,2,1)
+hold on
+grid on
+plot(list_of_fir_filter_orders,...
+     0.5*sum(calculated_AVAR(1:end-1,:,index_freq)+calculated_AVAR(2:end,:,1),1),...
+     'k','Linewidth',1.2)
+xline(3,'--','Color',[0.8500 0.3250 0.0980],'Linewidth',1.2)
+xline(40,'b','Linewidth',1.2)
+xline(550,'m-.','Linewidth',1.2)
+legend(['$\omega_{n} =$ ' num2str(list_of_normalized_cutoff_frequencies(index_freq))],...
+       '$p=3$','$p=40$','$p=550$',...
+       'NumColumns',2,'Location','best','Interpreter','latex','FontSize',13)
+set(gca,'Position',axis_position,'xtick',[1e0 1e1 1e2 1e3],'XScale','log','FontSize',13)
+ylabel('Area of AVAR $[Unit^2]$','Interpreter','latex','FontSize',18)
+xlabel('FIR Filter Order','Interpreter','latex','FontSize',18)
+title('$(a)$','Interpreter','latex','FontSize',18)
+
+normalized_cutoff_frequency = list_of_normalized_cutoff_frequencies(index_freq);
+axis_position = [(160+415.584)/width, 0.1567, 415.6/width, 0.7683];
+subplot(1,2,2)
+hold on
+grid on
+plot(-1,-1,'Color',[0.7 0.7 0.7],'Linewidth',3)
+plot(-1,-1,'.','Color',[0.8500 0.3250 0.0980],'Markersize',10)
+plot(-1,-1,'b','Linewidth',1.2)
+plot(-1,-1,'m','Linewidth',1.2)
+
+% Design FIR filter and Filter the input signal
+fir_filter_num  = fir1(3,normalized_cutoff_frequency);
+filtered_output = filter(fir_filter_num,1,input_signal);
+filtered_output = filtered_output(end-number_of_time_steps+1:end);
+plot(time_vector,filtered_output,'.','Color',[0.8500 0.3250 0.0980],'Markersize',4)
+
+% Design FIR filter and Filter the input signal
+fir_filter_num  = fir1(40,normalized_cutoff_frequency);
+filtered_output = filter(fir_filter_num,1,input_signal);
+filtered_output = filtered_output(end-number_of_time_steps+1:end);
+plot(time_vector,filtered_output,'b','Markersize',0.8)
+
+% Design FIR filter and Filter the input signal
+fir_filter_num  = fir1(550,normalized_cutoff_frequency);
+filtered_output = filter(fir_filter_num,1,input_signal);
+filtered_output = filtered_output(end-number_of_time_steps+1:end);
+plot(time_vector,filtered_output,'m','Linewidth',0.8)
+
+plot(time_vector,random_walk(end-number_of_time_steps+1:end),'Color',[0.7 0.7 0.7],'Linewidth',3)
+
+legend('Reference Input','$p=3$','$p=40$','$p=550$','NumColumns',2,...
        'Interpreter','latex','FontSize',13)
 set(gca,'Position',axis_position,'FontSize',13)
 ylabel('Amplitude $[Unit]$','Interpreter','latex','FontSize',18)
