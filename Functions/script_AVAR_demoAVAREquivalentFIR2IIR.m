@@ -93,8 +93,7 @@ subplot(1,3,1)
 axis_position = [85/width, 0.1567, 415.6/width, 0.7683];
 hold on
 grid on
-fill([list_of_correlation_intervals; list_of_correlation_intervals(end:-1:1)],...
-     [lb_estimated_avar; ub_estimated_avar(end:-1:1)],'m','FaceAlpha',0.5,'EdgeColor','none')
+plot(list_of_correlation_intervals,lb_estimated_avar,'Color',[0 0 0 0.2],'Linewidth',7)
 legend_cell{1} = ['IIR: $M =$ ' num2str(iir_filter_order) ', $\omega_{n} =$ ' num2str(iir_cutoff_freq)];
 for i = 1:number_of_FIR_filters
     % Calculate FIR filter weights using state matrices and filter order
@@ -114,6 +113,8 @@ for i = 1:number_of_FIR_filters
          'Linewidth',1.2)
     legend_cell{i+1} = ['FIR: $p =$ ' num2str(filter_order)];
 end % NOTE: END for loop 'number_of_FIR_filters'
+fill([list_of_correlation_intervals; list_of_correlation_intervals(end:-1:1)],...
+     [lb_estimated_avar; ub_estimated_avar(end:-1:1)],'k','FaceAlpha',0.2,'EdgeColor','none')
 legend(legend_cell,'NumColumns',2,'Location','best','Interpreter','latex','FontSize',13)
 set(gca,'Position',axis_position,'xtick',[1e0 1e2 1e4],'XScale','log','YScale','log','FontSize',13)
 ylabel('Allan Variance $[Unit^2]$','Interpreter','latex','FontSize',18)

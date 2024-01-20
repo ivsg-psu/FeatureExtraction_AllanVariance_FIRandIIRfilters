@@ -107,14 +107,15 @@ for i = 1:number_of_FIR_filters
         subplot(1,3,index_plot)
         hold on
         grid on
-        fill([list_of_correlation_intervals; list_of_correlation_intervals(end:-1:1)],...
-             [lb_estimated_avar; ub_estimated_avar(end:-1:1)],'m','FaceAlpha',0.5,'EdgeColor','none')
+        plot(list_of_correlation_intervals,lb_estimated_avar,'Color',[0 0 0 0.2],'Linewidth',7)
         legend_cell{i} = ['IIR: $M =$ ' num2str(iir_filter_order) ', $\omega_{n} =$ ' num2str(iir_cutoff_freq)];
     end
     plot(list_of_correlation_intervals,calculated_avar,'Color',custom_color_map(i,:),...
          'Linewidth',1.2)
     legend_cell{i+1} = ['FIR: $p =$ ' num2str(filter_order)];
     if i==number_of_FIR_filters
+        fill([list_of_correlation_intervals; list_of_correlation_intervals(end:-1:1)],...
+             [lb_estimated_avar; ub_estimated_avar(end:-1:1)],'k','FaceAlpha',0.2,'EdgeColor','none')
         legend(legend_cell,'NumColumns',2,'Location','best','Interpreter','latex','FontSize',13)
         if index_plot==1
             set(gca,'Position',axis_position,'xtick',[1e0 1e2 1e4],'XScale','log','YScale','log','FontSize',13)
@@ -123,7 +124,7 @@ for i = 1:number_of_FIR_filters
             set(gca,'Position',axis_position,'xtick',[1e0 1e2 1e4],'YTickLabel',[],'XScale','log','YScale','log','FontSize',13)
         end
         xlabel('Correlation Interval $[Number \: of \: Samples]$','Interpreter','latex','FontSize',17)
-        ylim([10^-8.5 10^0.5])
+        ylim([10^-8.5 1e0])
         ax1 = gca;
         axes('Position',axis_position,'XAxisLocation','top',...
              'xLim',ax1.XLim*sampling_interval,'XScale','log','ytick',[],...
